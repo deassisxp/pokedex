@@ -2,17 +2,28 @@
 <html>
 <head>
     <title>Pokedex</title>
-    <link rel="" href="./icons/icons8-pokeball-16.png">
+    <link rel="shortcut icon" href="./icons/icons8-pokeball-16.png" type="image/x-icon">
     <link rel="stylesheet" href="./CSS/style.css">
+
+    <script defer src="./JS/script.js"></script>
 </head>
 <body>
-    <div id="pokemon-cards">
-        <!-- Os cards de Pokémon serão gerados dinamicamente aqui -->
+    <div><h1>Pokedex</h1></div>
+    <div class="main">
+        <div class="pokemon__cards">
+            <img class="plano" src="./img/carta.jpg" alt="pokemon">
+            <img class="pokemon__image" src="#" alt="Imagem do Pokémon">
+            <h2 class="pokemon__name">nome</h2>
+            <p class="pokemon__id">id</p>
+            <p class="pokemon__tipo">tipo</p>  
+            <p class="pokemon__hp">hp</p>  
+            <p class="pokemon__atk">atk</p>  
+            <p class="pokemon__def">def</p>  
+        </div>
     </div>
-    <form id="team-form">
+    <form class="form">
         <input type="text" id="team-name" placeholder="Nome do time">
         <button type="submit">Salvar Time</button>
     </form>
-    <script src="seuArquivoJavascript.js"></script>
 </body>
 </html>
