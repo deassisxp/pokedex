@@ -1,53 +1,43 @@
 const API_URL = "https://pokeapi.co/api/v2/pokemon/";
 
 function createPokemonCard(pokemon) {
-    // Criar um elemento div para o card
     let card = document.createElement("div");
     card.classList.add("pokemon__cards");
 
-    // Criar um elemento img para o plano de fundo do card
     let plano = document.createElement("img");
     plano.classList.add("plano");
     plano.src = "./img/carta.jpg";
     plano.alt = "pokemon";
 
-    // Criar um elemento img para a imagem do Pokémon
     let image = document.createElement("img");
     image.classList.add("pokemon__image");
     image.src = pokemon.sprites.front_default;
     image.alt = "Imagem do Pokémon";
 
-    // Criar um elemento h2 para o nome do Pokémon
     let name = document.createElement("h2");
     name.classList.add("pokemon__name");
     name.textContent = pokemon.name;
 
-    // Criar um elemento p para o id do Pokémon
     let id = document.createElement("p");
     id.classList.add("pokemon__id");
     id.textContent = pokemon.id;
 
-    // Criar um elemento p para o tipo do Pokémon
     let type = document.createElement("p");
     type.classList.add("pokemon__tipo");
     type.textContent = pokemon.types[0].type.name;
 
-    // Criar um elemento p para o hp do Pokémon
     let hp = document.createElement("p");
     hp.classList.add("pokemon__hp");
     hp.textContent = "HP: " + pokemon.stats[0].base_stat;
 
-    // Criar um elemento p para o ataque do Pokémon
     let atk = document.createElement("p");
     atk.classList.add("pokemon__atk");
     atk.textContent = "ATK: " + pokemon.stats[1].base_stat;
 
-    // Criar um elemento p para a defesa do Pokémon
     let def = document.createElement("p");
     def.classList.add("pokemon__def");
     def.textContent = "DEF: " + pokemon.stats[2].base_stat;
 
-    // Adicionar os elementos criados ao card
     card.appendChild(plano);
     card.appendChild(image);
     card.appendChild(name);
@@ -57,7 +47,6 @@ function createPokemonCard(pokemon) {
     card.appendChild(atk);
     card.appendChild(def);
 
-    // Retornar o card
     return card;
 }
 
