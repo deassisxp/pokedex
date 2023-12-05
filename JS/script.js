@@ -1,4 +1,4 @@
-const API_URL = "https://pokeapi.co/api/v2/pokemon/";
+//const API_URL = "https://pokeapi.co/api/v2/pokemon/";
 
 function createPokemonCard(pokemon) {
     let card = document.createElement("div");
@@ -50,24 +50,40 @@ function createPokemonCard(pokemon) {
     return card;
 }
 
-function fetchPokemonData(number) {
-    let url = API_URL + number;
+const fetchPokemonData = async (number) => {
+    
+    try {
+        const API_URL = await fetch(`https://pokeapi.co/api/v2/pokemon/${number}`);
 
-    fetch(url)
-        .then(response => response.json()) 
-        .then(pokemon => { 
-            let card = createPokemonCard(pokemon);
+        let pokemon = await API_URL.json();
 
-            let main = document.querySelector(".main");
+        let card = createPokemonCard(pokemon);
 
-            main.appendChild(card);
-        })
-        .catch(error => console.error(error)); 
+        let main = document.querySelector(".main");
+        main.appendChild(card);
+    } catch (error) {
+        console.error(error);
+    }
 }
+
+// function fetchPokemonData(number) {
+//     let url = API_URL + number;
+
+//     fetch(url)
+//         .then(response => response.json()) 
+//         .then(pokemon => { 
+//             let card = createPokemonCard(pokemon);
+
+//             let main = document.querySelector(".main");
+
+//             main.appendChild(card);
+//         })
+//         .catch(error => console.error(error)); 
+// }
 
 function fetchAllPokemon() {
 
-    for (let i = 1; i <= 151; i++) {
+    for (let i = 1; i <= 15; i++) {
         fetchPokemonData(i);
     }
 }
