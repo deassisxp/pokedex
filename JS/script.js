@@ -131,7 +131,7 @@ function saveTeam(event) {
     }
 }
 
-function renderTeam() {
+const renderTeam = async () => {
     let teamJSON = localStorage.getItem("team");
 
     if (teamJSON) {
@@ -148,16 +148,29 @@ function renderTeam() {
         teamDisplay.appendChild(teamNameElement);
 
         for (let member of teamMembers) {
-            let url = API_URL + member;
+            
+            try {
+                const API_URL = await fetch(`https://pokeapi.co/api/v2/pokemon/${member}`);
 
-            fetch(url)
-                .then(response => response.json()) 
-                .then(pokemon => { 
-                    let card = createPokemonCard(pokemon);
+                let pokemon = await API_URL.json();
 
-                    teamDisplay.appendChild(card);
-                })
-                .catch(error => console.error(error)); 
+                let card = createPokemonCard(pokemon);
+
+                let teamDisplay = document.querySelector(".team-display");
+                teamDisplay.appendChild(card);
+            } catch (error) {
+                console.error(error);
+            }
+            // let url = API_URL + member;
+
+            // fetch(url)
+            //     .then(response => response.json()) 
+            //     .then(pokemon => { 
+            //         let card = createPokemonCard(pokemon);
+
+            //         teamDisplay.appendChild(card);
+            //     })
+            //     .catch(error => console.error(error)); 
         }
     } else {
         alert("Não há nenhum time salvo!");
