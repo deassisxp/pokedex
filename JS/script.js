@@ -83,7 +83,7 @@ const fetchPokemonData = async (number) => {
 
 function fetchAllPokemon() {
 
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= 151; i++) {
         fetchPokemonData(i);
     }
 }
@@ -148,7 +148,6 @@ const renderTeam = async () => {
         teamDisplay.appendChild(teamNameElement);
 
         for (let member of teamMembers) {
-            
             try {
                 const API_URL = await fetch(`https://pokeapi.co/api/v2/pokemon/${member}`);
 
@@ -156,40 +155,36 @@ const renderTeam = async () => {
 
                 let card = createPokemonCard(pokemon);
 
-                let teamDisplay = document.querySelector(".team-display");
+                // Add a listener to the card for click events
+                card.addEventListener("click", toggleSelected);
+
+                // Set the initial color based on the current selection
+                if (card.classList.contains("selected")) {
+                    card.style.backgroundColor = "green";
+                }
+
                 teamDisplay.appendChild(card);
             } catch (error) {
                 console.error(error);
             }
-            // let url = API_URL + member;
-
-            // fetch(url)
-            //     .then(response => response.json()) 
-            //     .then(pokemon => { 
-            //         let card = createPokemonCard(pokemon);
-
-            //         teamDisplay.appendChild(card);
-            //     })
-            //     .catch(error => console.error(error)); 
         }
     } else {
         alert("Não há nenhum time salvo!");
     }
-}
+};
 
 function toggleSelected(event) {
     let element = event.target;
 
     if (element.classList.contains("pokemon__cards") || element.closest(".pokemon__cards")) {
-        
         let card = element.classList.contains("pokemon__cards") ? element : element.closest(".pokemon__cards");
 
         if (card.classList.contains("selected")) {
-            
             card.classList.remove("selected");
+            card.style.backgroundColor = ""; // Reset the background color
         } else {
-            
             card.classList.add("selected");
+            card.style.backgroundColor = "green";
         }
     }
 }
